@@ -13,8 +13,7 @@
 
 <EditForm Model="avion" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
-    <ValidationSummary />
-
+   
     <div class="container mt-3">
         <div class="card shadow">
             <div class="card-header bg-primary text-white text-center">
@@ -25,11 +24,14 @@
                 <div class="mb-3">
                     <label class="form-label"><strong>Nombre</strong></label>
                     <InputText class="form-control" @bind-Value="avion.Nombre" />
+                    <ValidationMessage For="@(() => avion.Nombre)" />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Modelo</strong></label>
                     <InputText class="form-control" @bind-Value="avion.Modelo" />
+                    <ValidationMessage For="@(() => avion.Modelo)" />
+
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Foto</strong></label>
@@ -59,42 +61,57 @@
                             <option value="@cat.IdCategoria">@cat.Nombre</option>
                         }
                     </InputSelect>
+                    <ValidationMessage For="@(() => avion.IdCategoria)" />
+
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Capacidad de Pasajeros</strong></label>
                     <InputNumber class="form-control" @bind-Value="avion.CapacidadPasajeros" />
+                    <ValidationMessage For="@(() => avion.CapacidadPasajeros)" />
+
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Velocidad Máxima</strong></label>
-                    <InputNumber class="form-control" @bind-Value="avion.VelocidadMaxima" />
+                    <div class="input-group">
+                        <InputNumber class="form-control" @bind-Value="avion.VelocidadMaxima" />
+                        <span class="input-group-text">km/h</span>
+                      
+
+                    </div>
+                    <ValidationMessage For="@(() => avion.VelocidadMaxima)" />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Precio</strong></label>
                     <InputNumber class="form-control" @bind-Value="avion.Precio" />
+                    <ValidationMessage For="@(() => avion.Precio)" />
+
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Descripción</strong></label>
                     <InputText class="form-control" @bind-Value="avion.Descripcion" />
+                    <ValidationMessage For="@(() => avion.Descripcion)" />
+
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Fecha de Fabricación</strong></label>
                     <InputDate class="form-control" @bind-Value="avion.FechaFabricacion" />
+                    <ValidationMessage For="@(() => avion.FechaFabricacion)" />
+
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label"><strong>Cantidad Disponible</strong></label>
                     <InputNumber class="form-control" @bind-Value="avion.CantidadDisponible" />
+                    <ValidationMessage For="@(() => avion.CantidadDisponible)" />
+
                 </div>
 
-                <div class="form-check mb-3">
-                    <InputCheckbox class="form-check-input" @bind-Value="avion.Disponible" />
-                    <label class="form-check-label"><strong>Disponible</strong></label>
-                </div>
+              
             </div>
 
             <div class="card-footer text-center">
@@ -105,6 +122,7 @@
                     <button type="submit" class="btn btn-success">
                         <i class="bi bi-check-circle"></i> Guardar
                     </button>
+
                     <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">
                         <i class="bi bi-eraser"></i> Limpiar
                     </button>
@@ -121,6 +139,7 @@
     protected override async Task OnInitializedAsync()
     {
         categorias = await categoriaService.Listar();
+        avion.FechaFabricacion = DateTime.Today;
 
         if (categorias == null || categorias.Count == 0)
         {

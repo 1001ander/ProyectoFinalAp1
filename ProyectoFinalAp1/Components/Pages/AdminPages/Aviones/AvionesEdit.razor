@@ -6,15 +6,14 @@
 @inject CategoriaService categoriaService
 @inject AvionService avionesService
 @inject IToastService toast
-
+@inject IJSRuntime JSRuntime
 
 
 @if (avion != null)
 {
     <EditForm Model="avion" OnValidSubmit="Guardar">
         <DataAnnotationsValidator />
-        <ValidationSummary />
-
+      
         <div class="container mt-3">
             <div class="card shadow">
                 <div class="card-header bg-warning text-dark text-center">
@@ -25,11 +24,14 @@
                     <div class="mb-3">
                         <label class="form-label"><strong>Nombre</strong></label>
                         <InputText class="form-control" @bind-Value="avion.Nombre" />
+                        <ValidationMessage For="@(() => avion.Nombre)" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Modelo</strong></label>
                         <InputText class="form-control" @bind-Value="avion.Modelo" />
+                        <ValidationMessage For="@(() => avion.Modelo)" />
+
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Foto</strong></label>
@@ -48,7 +50,8 @@
                             <div class="text-danger mt-2">@ErrorMessage</div>
                         }
                     </div>
-                
+
+
                     <div class="mb-3">
                         <label class="form-label"><strong>Categoría</strong></label>
                         <InputSelect class="form-control" @bind-Value="avion.IdCategoria">
@@ -58,48 +61,66 @@
                                 <option value="@cat.IdCategoria">@cat.Nombre</option>
                             }
                         </InputSelect>
+                        <ValidationMessage For="@(() => avion.IdCategoria)" />
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Capacidad de Pasajeros</strong></label>
                         <InputNumber class="form-control" @bind-Value="avion.CapacidadPasajeros" />
+                        <ValidationMessage For="@(() => avion.CapacidadPasajeros)" />
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Velocidad Máxima</strong></label>
-                        <InputNumber class="form-control" @bind-Value="avion.VelocidadMaxima" />
+                        <div class="input-group">
+                            <InputNumber class="form-control" @bind-Value="avion.VelocidadMaxima" />
+                            <span class="input-group-text">km/h</span>
+
+
+                        </div>
+                        <ValidationMessage For="@(() => avion.VelocidadMaxima)" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Precio</strong></label>
                         <InputNumber class="form-control" @bind-Value="avion.Precio" />
+                        <ValidationMessage For="@(() => avion.Precio)" />
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Descripción</strong></label>
                         <InputText class="form-control" @bind-Value="avion.Descripcion" />
+                        <ValidationMessage For="@(() => avion.Descripcion)" />
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Fecha de Fabricación</strong></label>
                         <InputDate class="form-control" @bind-Value="avion.FechaFabricacion" />
+                        <ValidationMessage For="@(() => avion.FechaFabricacion)" />
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Cantidad Disponible</strong></label>
                         <InputNumber class="form-control" @bind-Value="avion.CantidadDisponible" />
+                        <ValidationMessage For="@(() => avion.CantidadDisponible)" />
+
                     </div>
 
-                    <div class="form-check mb-3">
-                        <InputCheckbox class="form-check-input" @bind-Value="avion.Disponible" />
-                        <label class="form-check-label"><strong>Disponible</strong></label>
-                    </div>
+
                 </div>
 
                 <div class="card-footer text-center">
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary" @onclick="Volver">
                             <i class="bi bi-arrow-left"></i> Volver
+                        </button>
+                        <button type="button" class="btn btn-danger" @onclick="() => EliminarAvion(avion.IdAvion)">
+                            <i class="bi bi-trash"></i> Eliminar
                         </button>
                         <button type="submit" class="btn btn-warning">
                             <i class="bi bi-check-circle"></i> Actualizar
@@ -229,6 +250,18 @@ else
         finally
         {
             StateHasChanged();
+        }
+    }
+
+    private async Task EliminarAvion(int id)
+    {
+        bool confirmado = await JSRuntime.InvokeAsync<bool>("confirm", $"¿Eliminar avión ID {id}?");
+        if (!confirmado) return;
+
+        var exito = await avionesService.Eliminar(id);
+        if (exito)
+        {
+            Volver();
         }
     }
 

@@ -4,7 +4,7 @@
 @inject IToastService toast
 @inject CategoriaService categoriaService
 @inject NavigationManager navigationManager
-
+@inject IJSRuntime JSRuntime
 
 @if (categoria == null)
 {
@@ -14,7 +14,7 @@ else
 {
     <EditForm Model="categoria" OnValidSubmit="Guardar">
         <DataAnnotationsValidator />
-        <ValidationSummary />
+   
 
         <div class="container mt-3">
             <div class="card shadow">
@@ -46,9 +46,13 @@ else
                         <button type="button" class="btn btn-secondary" @onclick="Volver">
                             <i class="bi bi-arrow-left"></i> Volver
                         </button>
+                        <button type="button" class="btn btn-danger" @onclick="() => EliminarCategoria(categoria.IdCategoria)">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-check-circle"></i> Actualizar
                         </button>
+
                         <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">
                             <i class="bi bi-eraser"></i> Limpiar
                         </button>
@@ -106,5 +110,18 @@ else
     private void Volver()
     {
         navigationManager.NavigateTo("/Categoria/CategoriaIndex");
+    }
+
+
+    private async Task EliminarCategoria(int id)
+    {
+        bool confirmado = await JSRuntime.InvokeAsync<bool>("confirm", $"¿Eliminar categoria ID {id}?");
+        if (!confirmado) return;
+
+        var exito = await categoriaService.Eliminar(id);
+        if (exito)
+        {
+            Volver();
+        }
     }
 }
