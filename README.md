@@ -9,7 +9,7 @@ Anderson Nuñez Consoro  2019-0030
 Con un diseño moderno, una experiencia fluida y un sistema de roles, permite que clientes y administradores interactúen de manera sencilla y eficiente.
 
 ---
- 📖 Historia del proyecto
+ ## 📖 Historia del proyecto
 La idea de **The SkyMarket** nació de la pasión por la aviación ✈️ y el deseo de crear una experiencia digital única para los entusiastas de los aviones.  
 El objetivo principal es ofrecer una plataforma donde los usuarios puedan explorar modelos, comparar precios y realizar compras, mientras que los administradores pueden gestionar el catálogo y controlar el inventario en tiempo real.
 
