@@ -5,7 +5,7 @@ Participante:
 Anderson Nuñez Consoro  2019-0030
 # ✈️ The SkyMarket – Tu mercado de aviones online
 
-**The SkyMarket** es una aplicación web que simula un mercado virtual de compra y venta de aviones.  
+**The SkyMarket** es una aplicación web que simula un mercado virtual de venta de aviones.  
 Con un diseño moderno, una experiencia fluida y un sistema de roles, permite que clientes y administradores interactúen de manera sencilla y eficiente.
 
 ---
