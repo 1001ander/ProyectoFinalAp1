@@ -51,6 +51,20 @@ El objetivo principal es ofrecer una plataforma donde los usuarios puedan explor
 4. Revisar el historial de ventas.
 5. Gestionar el catálogo de forma constante.
 
+## 🚀 Link del Proyecto
+🔗 [Visitar SkyMarketTH](https://skymarketth.somee.com/)
+
+---
+
+## 👥 Roles y Accesos
+
+### 🔑 Administrador
+- **Correo:** `admin@gmail.com`
+- **Contraseña:** `Admin123@`
+  ### 🛒 Cliente
+- **Correo:** `cliente@gmail.com`
+- **Contraseña:** `Cliente123@`
+
 
 💬 *“La aviación es prueba de que soñar es posible”*
 
