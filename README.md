@@ -15,12 +15,12 @@ El objetivo principal es ofrecer una plataforma donde los usuarios puedan explor
 
 ---
 
- 🎯 Objetivos del sistema
+ 🎯 Objetivos del sistema:
 - Brindar a los clientes una forma rápida y clara de explorar aviones disponibles.
 - Mantener un control preciso del inventario y las ventas.
 - Facilitar la gestión para administradores sin necesidad de conocimientos técnicos.
 
-👤 Roles y funcionalidades
+👤 Roles y funcionalidades:
 
  🛒 Cliente
 - 📜 **Catálogo de aviones** con imágenes, especificaciones y precios.
@@ -28,7 +28,7 @@ El objetivo principal es ofrecer una plataforma donde los usuarios puedan explor
 - 🛍️ **Carrito de compras** para agregar múltiples aviones antes de la compra.
 - 💳 **Proceso de compra** simple y directo.
 
- 🛠️ Administrador
+ 🛠️ Administrador:
 - ➕ **Registrar aviones** con todos sus datos técnicos.
 - ✏️ **Editar** información de modelos existentes.
 - 🗑️ **Eliminar** aviones del catálogo.
